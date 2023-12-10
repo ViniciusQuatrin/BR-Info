@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('servico', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('produto_id');
+            $table->foreign('produto_id')->references('id')->on('produto');
+            $table->string('nome');
+            $table->string('descricao');
+            $table->float('preco');
+            $table->float('custo');
+            $table->float('valor_liquido');
             $table->timestamps();
         });
     }
