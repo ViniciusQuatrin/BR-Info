@@ -10,7 +10,7 @@ class Produto extends OfertaValor
     private $codigoProduto;
     private Categoria $categorias;
 
-    public function __construct($nome, $valor, $custo, $preco, $descricao, $codigoProduto, $categorias);
+    public function __construct($nome, $valor, $custo, $preco, $descricao, $codigoProduto, $categorias)
     {
         parent::__construct($nome, $valor, $custo, $preco, $descricao);
         $this->codigoProduto = $codigoProduto;

@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use .\Models\OfertaValor;
 
-class Produto extends Model
+class Produto extends OfertaValor
 {
     use HasFactory;
+
+    protected $table = 'produto';
 
     protected $fillable = [
         'nome',
