@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\OfertaValor;
+use App\Produto\Categoria;
 
 class Produto extends OfertaValor
 {
@@ -14,14 +15,9 @@ class Produto extends OfertaValor
     protected $table = 'produto';
 
     protected $fillable = [
-        'nome',
-        'preco',
-        'custo',
-        'valor_liquido',
-        'descricao',
         'codigo_produto',
-        'categorias'
+        'categorias',
     ];
-    
 
+    protected Categoria $categorias;
 }
