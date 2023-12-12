@@ -2,7 +2,7 @@
 
 namespace App;
 
-abstract class OfertaValor
+trait OfertaValor
 {
     protected $nome;
     protected $valor;
@@ -10,13 +10,34 @@ abstract class OfertaValor
     protected $preco;
     protected $descricao;
 
-    public function __construct($nome, $valor, $custo, $preco, $descricao)
+    protected function initializeOfertaValor() 
     {
-        $this->nome = $nome;
-        $this->valor = $valor;
-        $this->custo = $custo;
-        $this->preco = $preco;
-        $this->descricao = $descricao;
+        $this->nome = '';
+        $this->descricao = '';
+        $this->custo = 0;
+        $this->preco = 0;
+        $this->valor = 0;
+    }
+
+    protected static function bootOfertaValor()
+    {
+        static::boot();
+
+        static::creating(function ($model) {
+            $model->initializeOfertaValor();
+        });
+
+        static::updating(function ($model) {
+            $model->initializeOfertaValor();
+        });
+
+        static::deleting(function ($model) {
+            $model->initializeOfertaValor();
+        });
+
+        static::restoring(function ($model) {
+            $model->initializeOfertaValor();
+        });
     }
 
     public function getNome()

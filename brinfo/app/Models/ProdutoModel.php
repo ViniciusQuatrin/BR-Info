@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use .\Models\OfertaValor;
+use App\Traits\OfertaValor;
 
 class Produto extends OfertaValor
 {
     use HasFactory;
+    use OfertaValor;
 
     protected $table = 'produto';
 
@@ -22,4 +23,5 @@ class Produto extends OfertaValor
         'categorias'
     ];
     
+
 }
