@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Produto;
+namespace App\Enums;
 
 enum Categoria: string
 {

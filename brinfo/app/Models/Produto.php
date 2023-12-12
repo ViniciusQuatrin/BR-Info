@@ -5,12 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\OfertaValor;
-use App\Produto\Categoria;
+use App\Enums\Categoria;
 
 class Produto extends OfertaValor
 {
-    use HasFactory;
-    use OfertaValor;
+    use HasFactory, OfertaValor;
+
+    public function __construct(array $attributes = [])
+    { 
+        parent::__construct($attributes);
+        $this->initilizeOfertaValor();
+    }
 
     protected $table = 'produto';
 
@@ -19,5 +24,9 @@ class Produto extends OfertaValor
         'categorias',
     ];
 
-    protected Categoria $categorias;
+    protected $casts = [
+        'categorias' => 'enumerated',
+    ];
+
+    
 }

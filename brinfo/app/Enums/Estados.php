@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Endereco;
+namespace App\Enums;
 
 enum Estados: string
 {
