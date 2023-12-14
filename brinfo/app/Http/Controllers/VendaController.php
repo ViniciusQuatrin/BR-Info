@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Venda;
+use App\Models\Funcionario;
+use App\Models\Produto as Produto;
+use App\Models\Servico as Servico;
+
 class VendaController extends Controller
 {
     /**
@@ -11,7 +16,8 @@ class VendaController extends Controller
      */
     public function index()
     {
-        //
+        $vendas = Venda::all();
+        return view('venda.index');
     }
 
     /**
@@ -19,7 +25,9 @@ class VendaController extends Controller
      */
     public function create()
     {
-        //
+        $produtos = Produto::all();
+        $servicos = Servico::all();
+        return view('venda.create', compact('produtos', 'servicos'));
     }
 
     /**
@@ -27,7 +35,17 @@ class VendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'funcionario_id' => 'required',
+            'cliente_id' => 'required',
+            'data' => 'required',
+            'total' => 'required',
+            'forma_pagamento' => 'required',
+        ]);
+
+        Venda::create($request->all());
+
+        return redirect()->route('venda.index')->with('success', 'Venda criada com sucesso!');
     }
 
     /**
@@ -43,7 +61,11 @@ class VendaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $venda = Venda::find($id);
+        $funcionarios = Funcionario::all();
+        $produtos = Produto::all();
+        $servicos = Servico::all();
+        return view('venda.edit', compact('venda', 'funcionarios', 'produtos', 'servicos'));
     }
 
     /**
@@ -51,7 +73,19 @@ class VendaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'funcionario_id' => 'required',
+            'cliente_id' => 'required',
+            'data' => 'required',
+            'total' => 'required',
+            'forma_pagamento' => 'required',
+        ]);
+
+        $venda = Venda::find($id);
+
+        $venda->update($request->all());
+
+        return redirect()->route('venda.index')->with('success', 'Venda atualizada com sucesso!');
     }
 
     /**
@@ -59,6 +93,7 @@ class VendaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $venda = Venda::find($id);
+        $venda->delete();
     }
 }

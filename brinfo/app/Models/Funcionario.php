@@ -19,4 +19,9 @@ class Funcionario extends Model
         'salario',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
