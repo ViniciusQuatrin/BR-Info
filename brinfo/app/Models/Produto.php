@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\OfertaValor;
 use App\Enums\Categoria;
 
-class Produto extends OfertaValor
+class Produto extends Model
 {
     use HasFactory, OfertaValor;
 

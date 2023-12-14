@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Funcionario as Funcionario;
 
 class FuncionarioController extends Controller
 {
@@ -11,7 +12,9 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        //
+        return view('funcionarios.index', [
+            'funcionarios' => Funcionario::all()
+        ]);
     }
 
     /**
@@ -19,7 +22,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('funcionarios.create');
     }
 
     /**
@@ -27,7 +30,17 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'num_cracha' => 'required',
+            'nome' => 'required',
+            'cargo' => ['required', new EnumRule(Cargo::class)],
+            'salario' => 'required',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        Funcionario::create($request->all());
+
+        return redirect()->route('funcionarios.create')->with('success', 'Funcionário criado com sucesso!');
     }
 
     /**
