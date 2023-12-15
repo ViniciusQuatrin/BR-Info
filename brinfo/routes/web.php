@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VendaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +19,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/venda', [VendaController::class, 'index'])->name('venda.index');
+
+Route::get('/venda/create', [VendaController::class, 'create'])->middleware('auth')->name('venda.create');
+
+Route::post('/venda/store', [VendaController::class, 'store'])->middleware('auth')->name('venda.store');
+
+Route::delete('/venda/delete/{id}', [VendaController::class, 'destroy'])->middleware('auth')->name('venda.destroy');

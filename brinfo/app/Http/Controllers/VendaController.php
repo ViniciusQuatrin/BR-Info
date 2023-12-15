@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Venda;
+use App\Models\Venda as Venda;
 use App\Models\Funcionario;
 use App\Models\Produto as Produto;
 use App\Models\Servico as Servico;
@@ -16,8 +16,11 @@ class VendaController extends Controller
      */
     public function index()
     {
+        Venda::factory(10)->create();
+
         $vendas = Venda::all();
-        return view('venda.index');
+        dd($vendas);
+        return view('venda.index', compact('vendas'));
     }
 
     /**

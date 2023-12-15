@@ -11,24 +11,19 @@ class Produto extends Model
 {
     use HasFactory, OfertaValor;
 
-    public function __construct(array $attributes = [])
-    { 
-        parent::__construct($attributes);
-        $this->initilizeOfertaValor();
-    }
-
     protected $table = 'produto';
 
     protected $fillable = [
-        'codigo_produto',
         'categorias',
     ];
 
     protected $casts = [
-        'categorias' => 'enumerated',
+        'categorias' => Categoria::class
     ];
 
-    
-
-    
+    public function __construct(array $attributes = [])
+    { 
+        parent::__construct($attributes);
+        $this->initializeOfertaValor();
+    }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Enums\Categoria as Categoria;
+
 class ProdutoController extends Controller
 {
     /**
@@ -11,7 +13,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+        $produtos = Produto::all();
+
+        return view('produto.index', compact('produtos'));
     }
 
     /**
@@ -19,7 +23,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('produto.create');
     }
 
     /**
@@ -27,7 +31,18 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+            'valor_liquido' => 'required',
+            'preco' => 'required',
+            'custo' => 'required',
+            'categoria' => ['required', 'enum', Categoria::class],
+        ]);
+
+        Produto::create($request->all());
+
+        return redirect()->route('produto.index')->with('success', 'Produto criado com sucesso!');
     }
 
     /**
@@ -51,7 +66,7 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
@@ -59,6 +74,6 @@ class ProdutoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
     }
 }
