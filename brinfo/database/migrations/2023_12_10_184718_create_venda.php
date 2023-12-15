@@ -15,14 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('funcionario_id');
             $table->unsignedBigInteger('cliente_id');
-            $table->unsignedBigInteger('produto_id');
-            $table->unsignedBigInteger('servico_id');
+            $table->unsignedBigInteger('produto_id')->default(null)->nullable();
+            $table->unsignedBigInteger('servico_id')->default(null)->nullable();
             $table->foreign('funcionario_id')->references('id')->on('funcionario');
             $table->foreign('cliente_id')->references('id')->on('cliente');
-            $table->foreign('produto_id')->references('id')->on('produto')
-            ->default(null)->nullable();
-            $table->foreign('servico_id')->references('id')->on('servico')
-            ->default(null)->nullable();
+            $table->foreign('produto_id')->references('id')->on('produto'); 
+            $table->foreign('servico_id')->references('id')->on('servico');
             $table->date('data');
             $table->float('valor');
             $table->enum('forma_pagamento', ['credito', 'debito', 'dinheiro', 'pix', 'boleto', 'transferencia']);

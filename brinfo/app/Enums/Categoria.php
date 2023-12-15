@@ -4,11 +4,25 @@ namespace App\Enums;
 
 enum Categoria: string
 {
-    case Acessorios = "acessórios";
-    case Computadores = "computadores";
-    case Notebooks = "notebooks";
-    case Tablets = "tablets";
-    case Componentes = "componentes";
-    case Celulares = "celulares";
-    case Outros = "outros";
+    case Acessorios = "Acessorios";
+    case Computadores = "Computadores";
+    case Notebooks = "Notebooks";
+    case Tablets = "Tablets";
+    case Componentes = "Componentes";
+    case Celulares = "Celulares";
+    case Outros = "Outros";
+
+    public static function values(): array
+    {
+        return [
+            "Acessorios",
+            "Computadores",
+            "Notebooks",
+            "Tablets",
+            "Componentes",
+            "Celulares",
+            "Outros",
+        ];
+    }
+    
 }

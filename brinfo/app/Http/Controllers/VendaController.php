@@ -16,7 +16,7 @@ class VendaController extends Controller
      */
     public function index()
     {
-        Venda::factory(10)->create();
+        // Venda::factory(10)->create();s
 
         $vendas = Venda::all();
         dd($vendas);

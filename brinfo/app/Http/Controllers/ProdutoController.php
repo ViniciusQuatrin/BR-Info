@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Produto as Produto;
 use App\Enums\Categoria as Categoria;
 
 class ProdutoController extends Controller
@@ -14,7 +15,6 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::all();
-
         return view('produto.index', compact('produtos'));
     }
 
@@ -37,10 +37,20 @@ class ProdutoController extends Controller
             'valor_liquido' => 'required',
             'preco' => 'required',
             'custo' => 'required',
-            'categoria' => ['required', 'enum', Categoria::class],
+            'categoria' => ['required', 'in:' . implode(',', Categoria::values())]
         ]);
 
-        Produto::create($request->all());
+        $valorLiquido = $request->input('custo') - $request->input('preco');
+
+        $request->merge([
+            'valor_liquido' => $valorLiquido
+        ]);
+
+        try { 
+            Produto::create($request->all());
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
 
         return redirect()->route('produto.index')->with('success', 'Produto criado com sucesso!');
     }

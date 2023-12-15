@@ -27,6 +27,7 @@ class VendaFactory extends Factory
             'cliente_id' => $this->faker->numberBetween(1, 10),
             'produto_id' => $this->faker->numberBetween(1, 100),
             'forma_pagamento' => $this->faker->randomElement(['debito', 'pix', 'dinheiro']),
+            //'servico_id' => $this->faker->number(0),
         ];
     }
 }

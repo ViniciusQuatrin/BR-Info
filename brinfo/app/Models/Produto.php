@@ -9,11 +9,16 @@ use App\Enums\Categoria;
 
 class Produto extends Model
 {
-    use HasFactory, OfertaValor;
+    use HasFactory; //, OfertaValor;
 
     protected $table = 'produto';
 
     protected $fillable = [
+        '$nome',
+        '$valor',
+        '$custo',
+        '$preco',
+        '$descricao',
         'categorias',
     ];
 
@@ -21,9 +26,9 @@ class Produto extends Model
         'categorias' => Categoria::class
     ];
 
-    public function __construct(array $attributes = [])
-    { 
-        parent::__construct($attributes);
-        $this->initializeOfertaValor();
-    }
+    // public function __construct(array $attributes = [])
+    // { 
+    //     parent::__construct($attributes);
+    //     $this->initializeOfertaValor();
+    // }
 }
